@@ -1,0 +1,136 @@
+connectors:
+  X100: &ring38
+    type: 3/8 Ring
+    pincount: 1
+    style: simple
+    show_name: true
+
+  X101: &ring12
+    type: 3/8 Ring
+    pincount: 1
+    style: simple
+    show_name: true
+
+  X102: &page
+    type: page_break
+    pincount: 1
+    style: simple
+    show_name: true
+
+  BAT+:
+    <<: *ring38
+    color: RD
+  
+  BAT-:
+    <<: *ring38
+    color: BK
+
+  +BUS:
+    type: Copper Bus Bar
+    pincount: 3
+  
+  -BUS:
+    type: Copper Bus Bar
+    pincount: 3
+
+  FB+:
+    <<: *page
+  
+  FB-:
+    <<: *page
+
+  Starter:
+    <<: *ring12
+    color: RD
+
+  Alt+:
+    <<: *ring38
+    color: RD
+
+  Frame1:
+    <<: *ring38
+    color: BK
+
+  Frame2:
+    <<: *ring38
+    color: BK
+
+  ENG_GND:
+    <<: *ring38
+    color: BK
+
+cables:
+  C0: &power_cable
+    category: power_cables
+    colors: [RD]
+    gauge: 0 awg
+
+  C101: &ground_cable
+    category: ground_cables
+    colors: [BK]
+    gauge: 0 awg
+
+  C1:
+    <<: *power_cable
+    length: 12 in
+
+  C2:
+    <<: *ground_cable
+    length: 12 in
+
+  C3:
+    <<: *power_cable
+    length: 72 in
+
+  C4:
+    <<: *power_cable
+    length: 72 in
+
+  C5:
+    <<: *ground_cable
+    length: 24 in
+
+  C6:
+    <<: *ground_cable
+    length: 24 in
+
+  W1:
+    category: wires
+    colors: [RD,BK]
+    length: 12 in
+    gauge: 12 awg
+
+
+connections:
+  -
+    - BAT+
+    - C1
+    - +BUS
+  -
+    - BAT-
+    - C2
+    - -BUS
+  -
+    - +BUS
+    - C3
+    - Starter
+  -
+    - Alt+
+    - C4
+    - Starter
+  -
+    - +BUS: 2
+    - W1: 1
+    - FB+: 1
+  -
+    - -BUS: 1
+    - W1: 2
+    - FB-: 1
+  -
+    - -BUS: 2
+    - C5
+    - Frame1
+  -
+    - Frame2
+    - C6
+    - ENG_GND
