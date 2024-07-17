@@ -1,0 +1,102 @@
+connectors:
+  L: &lamp
+    type: 5.75" Headlight
+    subtype: female
+    pinlabels: [LPWR,HPWR,GND]
+
+  Page: &page
+    type: page_break
+    pincount: 1
+    style: simple
+    show_name: true
+
+  Splice: &splice
+    type: splice
+    subtype: 14 awg
+    pincount: 1
+    style: simple
+
+cables:
+  W1:
+    category: headlights
+    colors: [YE,WH]
+    gauge: 14 awg
+    length: 72 in
+
+  W2:
+    category: headlights
+    colors: [BK]
+    gauge: 14 awg
+    length: 72 in
+
+  WL:
+    category: headlights
+    colors: [YE,WH,BK]
+    gauge: 18 awg
+    length: 72 in
+
+connections:
+-
+  - Page.X1
+  - W1: 1
+  - Splice.S1
+-
+  - Page.X2
+  - W1: 2
+  - Splice.S2
+-
+  - Page.X2
+  - W2
+  - Splice.S3
+-
+  - S2
+  - WL.W3: 2
+  - L.L1: 2
+-
+  - S3
+  - W3: 3
+  - L1: 3
+-
+  - S1
+  - WL.W4: 1
+  - L.L2: 1
+-
+  - S2
+  - W4: 2
+  - L2: 2
+-
+  - S3
+  - W4: 3
+  - L2: 3
+-
+  - S1
+  - WL.W5: 1
+  - L.L3: 1
+-
+  - S2
+  - W5: 2
+  - L3: 2
+-
+  - S3
+  - W5: 3
+  - L3: 3
+-
+  - S2
+  - WL.W6: 2
+  - L.L4: 2
+-
+  - S3
+  - W6: 3
+  - L4: 3
+
+
+tweak:
+  append: |
+    subgraph cluster1 {
+      label="Headlights"
+      style=dashed
+      "L1"
+      "L2"
+      "L3"
+      "L4"
+    }

@@ -11,7 +11,7 @@ connectors:
     style: simple
     show_name: true
 
-  X102: &page
+  Page: &page
     type: page_break
     pincount: 1
     style: simple
